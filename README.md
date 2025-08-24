@@ -30,7 +30,7 @@ Valid device credentials
 
 Clone Repository
 git clone https://github.com/pgk-labs/Network-Infrastructure-Statistics-Tool.git
-cd network-infrastructure-statistics
+cd Network-Infrastructure-Statistics-Tool
 Install Dependencies
 pip install -r requirements.txt
 
@@ -46,10 +46,10 @@ on cli run pyats run job infrastructure_job.py
 Scheduling with Cron
 Add to your crontab for automated execution:
 # Run every hour
-0 * * * * cd /path/to/network-infrastructure-statistics && /usr/bin/python3 -m pyats run job network-infrastructure_job.py
+0 * * * * cd /path/to/Network-Infrastructure-Statistics-Tool && /usr/bin/python3 -m pyats run job network-infrastructure_job.py
 
 # Run every 15 minutes
-*/15 * * * * cd /path/to/network-infrastructure-statistics && /usr/bin/python3 -m pyats run job network-infrastructure_job.py
+*/15 * * * * cd /path/to/Network-Infrastructure-Statistics-Tool && /usr/bin/python3 -m pyats run job network-infrastructure_job.py
 
 📁 File Structure
 network-infrastructure-statistics/
