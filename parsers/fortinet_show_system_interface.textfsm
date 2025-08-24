@@ -1,0 +1,25 @@
+Value Required INTERFACE_NAME (\S+)
+Value VDOM (\S+)
+Value IP (\S+)
+Value MASK (\S+)
+Value ALLOWACCESS (\S+)
+Value STATUS (\S+)
+Value DEVICE_IDENTIFICATION (\S+)
+Value ROLE (\S+)
+Value SNMP_INDEX (\d+)
+Value INTERFACE (\S+)
+Value VLANID (\d+)
+
+Start
+  ^\s+edit\s+"${INTERFACE_NAME}"
+  ^\s+set\s+vdom\s+"${VDOM}"
+  ^\s+set\s+ip\s+${IP}\s+${MASK}
+  ^\s+set\s+allowaccess\s+${ALLOWACCESS}
+  ^\s+set\s+status\s+${STATUS}
+  ^\s+set\s+device-identification\s+${DEVICE_IDENTIFICATION}
+  ^\s+set\s+role\s+${ROLE}
+  ^\s+set\s+snmp-index\s+${SNMP_INDEX}
+  ^\s+set\s+interface\s+"${INTERFACE}"
+  ^\s+set\s+vlanid\s+${VLANID}
+  ^\s+next -> Record
+

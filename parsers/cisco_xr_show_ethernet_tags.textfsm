@@ -1,0 +1,16 @@
+Value Required Interface (\S+)
+Value Status (\S+)
+Value MTU (\d+)
+Value Layer (\S+)
+Value OuterVlan (\S+)
+Value InnerVlan (\S+)
+Value Xtra (\S+)
+Value Pop (\d+)
+Value Push (\d+)
+
+Start
+  ^Interface\s+St\s+MTU\s+Ly\s+Outer\s+ -> InterfaceDetails
+
+InterfaceDetails
+  ^${Interface}\s+${Status}\s+${MTU}\s+${Layer}\s+${OuterVlan}\s+${InnerVlan}\s+${Xtra}\s+${Pop}\s+${Push}\s*$$ -> Record
+

@@ -1,0 +1,63 @@
+# TextFSM template for parsing the output of "show bundle" command on Cisco IOS XR
+# Define the variables to capture the required fields
+Value BUNDLE (\S+)
+Value STATUS (\S+)
+Value LOCAL_LINKS (\d+ / \d+ / \d+)
+Value LOCAL_BW (\d+ \(\d+\) kbps)
+Value MAC_ADDRESS (\S+)
+Value MAC_SOURCE (\(\S+\))
+Value INTER_CHASSIS (\S+)
+Value MIN_ACTIVE (\d+ / \d+ kbps)
+Value MAX_ACTIVE (\d+)
+Value WAIT_TIMER (\d+ ms)
+Value LB_LINK_ORDER (\S+)
+Value LB_HASH_TYPE (\S+)
+Value LB_LOCALITY_THRESHOLD (\S+)
+Value LACP_STATUS (\S+)
+Value LACP_FLAP (\S+)
+Value LACP_CISCO_EXT (\S+)
+Value LACP_NON_REVERT (\S+)
+Value MLACP (\S+)
+Value IPV4_BFD (\S+)
+Value IPV6_BFD (\S+)
+#
+Value List PORT_NAME (\S+)
+Value List PORT_DEVICE (\S+)
+Value List PORT_STATE (\S+)
+Value List PORT_ID (\S+)
+Value List PORT_BW_KBPS (\d+)
+Value List PORT_LINKSTATUS (\S+)
+
+# Start state to capture the bundle information
+Start
+  ^${BUNDLE}\s* -> Bundle
+
+# Bundle state to capture details of each bundle
+Bundle
+  ^\s+Status:\s+${STATUS}
+  ^\s+Local links <active/standby/configured>:\s+${LOCAL_LINKS}
+  ^\s+Local bandwidth <effective/available>:\s+${LOCAL_BW}
+  ^\s+MAC address \(source\):\s+${MAC_ADDRESS} ${MAC_SOURCE}
+  ^\s+Inter-chassis link:\s+${INTER_CHASSIS}
+  ^\s+Minimum active links / bandwidth:\s+${MIN_ACTIVE}
+  ^\s+Maximum active links:\s+${MAX_ACTIVE}
+  ^\s+Wait while timer:\s+${WAIT_TIMER}
+  ^\s+Load balancing:
+  ^\s+Link order signaling:\s+${LB_LINK_ORDER}
+  ^\s+Hash type:\s+${LB_HASH_TYPE}
+  ^\s+Locality threshold:\s+${LB_LOCALITY_THRESHOLD}
+  ^\s+LACP:\s+${LACP_STATUS}
+  ^\s+Flap suppression timer:\s+${LACP_FLAP}
+  ^\s+Cisco extensions:\s+${LACP_CISCO_EXT}
+  ^\s+Non-revertive:\s+${LACP_NON_REVERT}
+  ^\s+mLACP:\s+${MLACP}
+  ^\s+IPv4 BFD:\s+${IPV4_BFD}
+  ^\s+IPv6 BFD:\s+${IPV6_BFD}
+  ^\s+Port\s+Device\s+State\s+Port ID\s+B/W, kbps -> Ports
+
+# Ports state to capture information about individual ports
+Ports
+  ^\s*${PORT_NAME}\s+${PORT_DEVICE}\s+${PORT_STATE}\s+${PORT_ID}\s+${PORT_BW_KBPS}
+  ^\s*Link is ${PORT_LINKSTATUS}
+  ^\s*$$ -> Record Start
+

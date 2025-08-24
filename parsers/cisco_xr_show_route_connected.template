@@ -1,0 +1,7 @@
+Value PREFIX (\S+)
+Value AGE (\S+)
+Value INTERFACE (\S+)
+
+Start
+  ^C\s+${PREFIX}\sis directly connected,\s${AGE},\s${INTERFACE} -> Record
+

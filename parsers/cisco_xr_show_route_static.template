@@ -1,0 +1,13 @@
+Value PROTOCOL (\S+|\S+\s\S+)
+Value NETWORK (\d+\.\d+\.\d+\.\d+)
+Value MASK (\d+)
+Value DISTANCE (\d+|is)
+Value METRIC (\d+)
+Value TYPE (directly|via)
+Value Required NEXT_HOP (connected|\d+\.\d+\.\d+\.\d+)
+Value INTERFACE (\S+)
+Value UPTIME (\S+)
+
+Start
+  ^S\s+${NETWORK}/${MASK}\s+(?:\[${DISTANCE}/${METRIC}\]|is)\s+${TYPE}\s+${NEXT_HOP},\s+${UPTIME},\s+${INTERFACE} -> Record
+

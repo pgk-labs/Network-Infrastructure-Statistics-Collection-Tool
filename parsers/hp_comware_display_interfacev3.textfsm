@@ -1,0 +1,30 @@
+Value INTERFACE (\S+)
+Value STATE (\S+)
+Value FRAME_TYPE (.*?)
+Value MAC_ADDRESS (\S+)
+Value DESCRIPTION (.*?)
+Value BANDWIDTH (\d+)
+Value SPEED_MODE (.*?-speed mode)
+Value DUPLEX_MODE (.*?-duplex mode)
+Value PVID (\d+)
+Value LINK_TYPE (.*)
+Value VLAN_PASSING ([\s\d\-,]+)
+Value VLAN_PERMITTED ([\s\d\-,]+)
+Value ENCAPSULATION (.*)
+
+Start
+  ^Current state:\s+${STATE}
+  ^IP packet frame type:\s+${FRAME_TYPE},\s+hardware address:\s+${MAC_ADDRESS}
+  ^Description:\s+${DESCRIPTION}
+  ^Bandwidth:\s+${BANDWIDTH}\s+kbps
+  ^${SPEED_MODE},\s+${DUPLEX_MODE}
+  ^\s*PVID:\s+${PVID}
+  ^\s+Port link-type:\s+${LINK_TYPE}
+  ^\s+VLAN Passing:\s+${VLAN_PASSING}
+  ^\s+VLAN Passing:\s+${VLAN_PASSING}
+  ^\s+VLAN permitted:\s+${VLAN_PERMITTED}
+  ^\s+Trunk port encapsulation:\s+${ENCAPSULATION}
+  ^${INTERFACE}$$
+  ^\s*$$ -> Record Start
+
+

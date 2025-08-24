@@ -1,0 +1,7 @@
+Value VLAN_ID (\d+)
+Value ROOT_PRIO (\d+)
+Value ROOT_ID (\S+)
+Value ROOT_PORT (This bridge is root|\S+)
+
+Start
+  ^VLAN${VLAN_ID}\s+${ROOT_PRIO}\s+${ROOT_ID}\s+\d+\s+\d+\s+\d+\s+\d+\s+${ROOT_PORT} -> Record

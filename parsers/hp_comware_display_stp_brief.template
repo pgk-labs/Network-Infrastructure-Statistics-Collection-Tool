@@ -1,0 +1,8 @@
+Value Required VLAN_ID (\d+)
+Value Required PORT (\S+)
+Value ROLE (\S+)
+Value STP_STATE (\S+)
+Value PROTECTION (\S+)
+
+Start
+  ^\s*${VLAN_ID}\s+${PORT}\s+${ROLE}\s+${STP_STATE}\s+${PROTECTION}\s* -> Record

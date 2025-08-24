@@ -1,0 +1,35 @@
+Value INTERFACE (\S+)
+Value LINK (\S+)
+Value PROTOCOL (\S+)
+Value MAIN_IP (\S+|--)
+Value SPEED (\S+)
+Value DUPLEX (A|H|F|auto)
+Value TYPE (\S+)
+Value PVID (\S+)
+Value DESCRIPTION (.*?)
+
+Start
+  ^\s*Brief\s+information\s+on\s+interfaces\s+in\s+route\s+mode:\s*$$
+  ^\s*Link:\s+ADM\s+-\s+administratively\s+down;\s+Stby\s+-\s+standby\s*$$
+  ^\s*Protocol:\s+\(s\)\s+-\s+spoofing\s*$$
+  ^\s*Interface\s+Link\s+Protocol\s+Primary\s+IP\s+Description\s*$$ -> RouteModeIfaces
+  ^\s*Brief\s+information\s+on\s+interfaces\s+in\s+bridge\s+mode:\s*$$
+  ^\s*Link:\s+ADM\s+-\s+administratively\s+down;\s+Stby\s+-\s+standby\s*$$
+  ^\s*Speed:\s+\(a\)\s+-\s+auto\s*$$
+  ^\s*Duplex:\s+\(a\)/A\s+-\s+auto;\s+H\s+-\s+half;\s+F\s+-\s+full\s*$$
+  ^\s*Type:\s+A\s+-\s+access;\s+T\s+-\s+trunk;\s+H\s+-\s+hybrid\s*$$
+  ^\s*Interface\s+Link\s+Speed\s+Duplex\s+Type\s+PVID\s+Description\s*$$ -> BridgeModeIfaces
+  ^<\w+>show\s+interface\s+brief\s*$$
+  ^\s*$$
+  ^. -> Error
+
+RouteModeIfaces
+  ^\s*${INTERFACE}\s+${LINK}\s+${PROTOCOL}\s+${MAIN_IP}(?:\s+${DESCRIPTION})?\s*$$ -> Record
+  ^\s*$$ -> Start
+  ^. -> Error
+
+BridgeModeIfaces
+  ^\s*${INTERFACE}\s+${LINK}\s+${SPEED}\s+${DUPLEX}\S*\s+${TYPE}\s+${PVID}(?:\s+${DESCRIPTION})?\s*$$ -> Record
+  ^\s*$$ -> Start
+  ^. -> Error
+

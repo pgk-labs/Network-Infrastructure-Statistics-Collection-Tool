@@ -1,0 +1,9 @@
+Value VLAN_ID (\d+)
+Value BRIDGE_ID (\S+)
+Value ROOT_ID (\S+)
+
+Start
+  ^\S+\[VLAN\s+\d+\s+Global\s+Info -> Continue.Record
+  ^\S+\[VLAN\s+${VLAN_ID}\s+Global\s+Info
+  ^\s+Bridge\s+ID\s+\:\s+${BRIDGE_ID}
+  ^\s+VlanRoot\s+ID/RPC\s+\:\s+${ROOT_ID},

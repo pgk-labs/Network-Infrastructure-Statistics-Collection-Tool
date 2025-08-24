@@ -1,0 +1,17 @@
+Value Required INTERFACE (\S+)
+Value IP_ADDRESS (\S+)
+Value STATUS (Up|Down|Shutdown)
+Value PROTO (Up|Down)
+Value VRF (\S+)
+
+Start
+  ^Interface\s+IP-Address\s+Status\s+Protocol\s+Vrf-Name -> Interfaces
+  ^Interface\s+IP-Address\s+Status\s+Protocol -> Interfaces_No_VRF
+
+Interfaces
+  ^${INTERFACE}\s+${IP_ADDRESS}\s+${STATUS}\s+${PROTO}\s+${VRF} -> Record
+  ^. -> Error
+
+Interfaces_No_VRF
+  ^${INTERFACE}\s+${IP_ADDRESS}\s+${STATUS}\s+${PROTO} -> Record
+  ^. -> Error

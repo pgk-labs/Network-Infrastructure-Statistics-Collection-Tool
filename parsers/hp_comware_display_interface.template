@@ -1,0 +1,93 @@
+Value Required INTERFACE (\S+)
+Value LINE_STATUS (UP|DOWN|Administratively DOWN)
+Value PROTOCOL_STATUS (UP(\(spoofing\))?|DOWN)
+Value List IP_ADDRESS (\S+)
+Value MTU (\d+)
+Value L2MTU (\d+)
+Value List HW_ADDRESS ([a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+)
+Value DESCRIPTION (.*)
+Value BANDWIDTH (.*)
+Value DUPLEX (\S+)
+Value SPEED (\S+)
+Value PORT_LINK_TYPE (\S+)
+Value UNTAGGED_VLAN_ID (\d+)
+Value VLAN_NATIVE (\d+)
+Value VLAN_PASSING (\b\d+(?:-\d+)?(?:,\s*\d+(?:-\d+)?)*\b)
+Value VLAN_PERMITTED (\b\d+(?:-\d+)?(?:,\s*\d+(?:-\d+)?)*\b)
+
+Start
+  #^\S+$$.Record
+  ^\s*${INTERFACE}$$
+  ^\s*Current\s+state:\s+${LINE_STATUS}
+  ^\s*${INTERFACE}\s+current\s+state\s*:\s*${LINE_STATUS}
+  ^\s*Line\s+protocol\s+state:\s+${PROTOCOL_STATUS}
+  ^\s*Line\s+protocol\s+current\s+state:\s+${PROTOCOL_STATUS}
+  ^\s*Description:\s+${DESCRIPTION}
+  ^\s*Bandwidth:\s+${BANDWIDTH}
+  ^\s*Maximum\s+[Tt]ransmi\S+\s+[Uu]nit:\s+${MTU}
+  ^\s*The\sMaximum\s+Transmit\s+Unit\sis\s+${MTU}
+  ^\s*Maximum\s+frame\s+length:\s+${L2MTU}
+  ^\s*Forbid\s+jumbo\s+frames\s+to\s+pass
+  ^\s*The\sMaximum\s+Frame\s+Length\sis\s+${L2MTU}
+  ^\s*Internet\s+[Aa]ddress:\s+${IP_ADDRESS}\s+\([Pp]rimary\)
+  ^\s*Internet\s+[Aa]ddress\sis\s+${IP_ADDRESS}\s+[Pp]rimary
+  ^\s*Internet\s+[Aa]ddress:\s+${IP_ADDRESS}\s+\([Ss]ub\)
+  ^\s*IP\s+[Pp]acket\s+[Ff]rame\s+[Tt]ype\s*:\s*[^,]+,\s+[Hh]ardware\s+[Aa]ddress:\s+${HW_ADDRESS}
+  ^\s*IPv6\s+[Pp]acket\s+[Ff]rame\s+[Tt]ype\s*:\s*[^,]+,\s+[Hh]ardware\s+[Aa]ddress:\s+${HW_ADDRESS}
+  ^\s*${SPEED}\s+mode,\s+${DUPLEX}\s+mode
+  ^\s*${SPEED},\s+${DUPLEX},\s+link\s+type
+  ^\s*PVID:\s+${VLAN_NATIVE}
+  ^\s*Port\s+link-type:\s+${PORT_LINK_TYPE}
+  ^\s*Un[Tt]agged\s+VLAN\s+ID\s*:\s*${UNTAGGED_VLAN_ID}
+  ^\s+VLAN\s+[Pp]assing\s*:\s+${VLAN_PASSING}
+  ^\s+VLAN\s+permitted\s*:\s+${VLAN_PERMITTED}
+  # Next
+  ^$$ -> Next.Record
+  # Drop
+  ^\s*Link
+  ^\s*Encapsulation\s+is
+  ^\s*Phy-mru
+  ^\s*Last
+  ^\s*Trunk\s+port
+  ^\s*Loopback
+  ^\s*Media
+  ^\s*[Ff]low
+  ^\s*Allow\s+jumbo
+  ^\s*Broadcast
+  ^\s*Multicast
+  ^\s*Unicast
+  ^\s*No\sconnector
+  ^\s*M[Dd][Ii]\s+type
+  ^\s*Port\s+priority
+  ^\s*Current\s*system
+  ^\s*Peak
+  ^\s*IPv4\s+traffic
+  ^\s*IPv6\s+traffic
+  ^\s+Tagged\s+VLAN
+  ^\s+Un[tT]agged\s+VLAN
+  ^\s*[Ii]nput
+  ^\s*[Oo]utput
+  ^\s*Physical
+  ^\s*Internet\s+protocol
+  ^\s*Port\s+hardware
+  ^\s+\d+\s+unicasts
+  ^\s+-\s+unicasts
+  ^\s+\d+\s+[Cc][Rr][Cc]
+  ^\s+\d+\s+aborts
+  ^\s+\d+\s+packets,*\s*
+  ^\s+\d+\s+errors,*\s*
+  ^\s+\d+\s+lost
+  ^\s+\d+\s+input\s+error
+  ^\s+\d+\s+output\s+error
+  ^\s+\d+\s+drops,*\s*
+  ^\s+\d+\s+deferred,*\s*
+  ^\s+\d+\s+broadcasts
+  ^\s+\d+\s+ignored
+  ^\s+\d+\s+dribbles
+  ^\s*Tunnel\s
+  ^\s*GRE
+  ^\s*Checksumming\sof\sGRE
+  ^\s+-\s+ignored
+  ^\s+-\s+frame
+  ^\s+-\s+aborts
+  ^\s+-\s+lost\s+carrier
