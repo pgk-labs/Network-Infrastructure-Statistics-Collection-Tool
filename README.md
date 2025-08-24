@@ -29,7 +29,7 @@ Access to network devices via SSH/Telnet
 Valid device credentials
 
 Clone Repository
-git clone https://github.com/yourusername/network-infrastructure-statistics.git
+git clone https://github.com/pgk-labs/Network-Infrastructure-Statistics-Tool.git
 cd network-infrastructure-statistics
 Install Dependencies
 pip install -r requirements.txt
