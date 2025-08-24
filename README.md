@@ -6,7 +6,7 @@ A robust, multi-threaded Python tool for collecting statistics from network infr
 Multi-vendor Support: Cisco (IOS, NX-OS, IOS-XE), HPE, and FortiGate devices
 Parallel Execution: Concurrent device connections and command execution for improved performance
 Flexible Scheduling: Interval-based command execution with persistent state management
-TextFSM Parsing: Structured data extraction from CLI outputs
+TextFSM Parsing Support: Structured data extraction from CLI outputs
 Comprehensive Error Handling: Robust error recovery and detailed logging
 Email Notifications: Automated reporting of execution results and failures
 Thread-Safe Operations: Safe concurrent operations with proper synchronization
