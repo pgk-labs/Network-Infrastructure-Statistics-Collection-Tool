@@ -1,0 +1,39 @@
+# Commands configuration with intervals (in seconds)
+cisco:
+  - type: "ios"
+    devices: ["cisco-router-01"]
+    commands:
+      - command: "show version"
+        textfsm: "parsers/cisco_ios_show_version.textfsm"
+        interval: 3600  # 1 hour
+      - command: "show interfaces"
+        textfsm: "parsers/cisco_ios_show_interfaces.textfsm"
+        interval: 300   # 5 minutes
+      - command: "show ip route summary"
+        interval: 1800  # 30 minutes
+        
+  - type: "nxos"
+    devices: ["cisco-nexus-01"]
+    commands:
+      - command: "show version"
+        textfsm: "parsers/cisco_nxos_show_version.textfsm"
+        interval: 3600
+        
+hpe:
+  - devices: ["hpe-switch-01"]
+    commands:
+      - command: "display version"
+        textfsm: "parsers/hpe_display_version.textfsm"
+        interval: 3600
+      - command: "display interface brief"
+        textfsm: "parsers/hpe_display_interface_brief.textfsm"
+        interval: 300
+        
+forti:
+  - devices: ["fortigate-fw-01"]
+    commands:
+      - command: "get system status"
+        interval: 3600
+      - command: "get system interface"
+        textfsm: "parsers/fortios_get_system_interface.textfsm"
+        interval: 300

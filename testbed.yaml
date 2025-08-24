@@ -1,0 +1,46 @@
+# Example testbed.yaml
+testbed:
+  name: Infrastructure_Testbed
+  
+devices:
+  cisco-router-01:
+    type: router
+    os: iosxe
+    platform: cat9k
+    credentials:
+      default:
+        username: admin
+        password: password123
+    connections:
+      cli:
+        protocol: ssh
+        ip: 192.168.1.10
+        port: 22
+        
+  hpe-switch-01:
+    type: switch
+    os: comware
+    platform: hpe
+    credentials:
+      default:
+        username: admin
+        password: password123
+    connections:
+      cli:
+        protocol: ssh
+        ip: 192.168.1.20
+        port: 22
+        
+  fortigate-fw-01:
+    type: firewall
+    os: fortios
+    platform: fortigate
+    credentials:
+      default:
+        username: admin
+        password: password123
+    connections:
+      cli:
+        protocol: ssh
+        ip: 192.168.1.30
+        port: 22
